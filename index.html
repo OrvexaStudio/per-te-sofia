@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>TaxiPilot</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#e87517">
+  
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+
+<div>
+
+<h1>
+TaxiPilot
+</h1>
+
+
+<p>
+Bentornato,
+<span id="nomeAutista">
+</span>
+</p>
+
+</div>
+
+
+
+<div 
+id="statoServizio"
+class="status">
+
+Disponibile
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<main class="container">
+
+<section class="dashboard-card">
+
+<h2>
+Assistente TaxiPilot
+</h2>
+
+<div id="assistenteTurno">
+
+Caricamento assistente...
+
+</div>
+
+</section>
+
+<section class="hero-card">
+
+
+<h2>
+Prossima corsa
+</h2>
+
+
+<div id="prossimaCorsa">
+
+
+<p class="empty">
+
+Nessuna corsa programmata
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="stats-grid">
+
+
+
+<div class="stat-card">
+
+
+<span>
+Corse oggi
+</span>
+
+
+<strong id="numeroCorse">
+0
+</strong>
+
+
+</div>
+
+
+
+
+
+<div class="stat-card">
+
+
+<span>
+Incasso
+</span>
+
+
+<strong id="incassoGiornaliero">
+0 €
+</strong>
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="dashboard-card">
+
+
+<h2>
+Turno
+</h2>
+
+
+<div id="statoTurno">
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="dashboard-card">
+
+<h2>
+Test aggiornamento TaxiPilot
+</h2>
+
+<p>
+Se visualizzi questa card, il nuovo aggiornamento è stato pubblicato correttamente.
+</p>
+
+<button 
+class="main-button"
+onclick="alert('TaxiPilot aggiornato correttamente')">
+
+Prova aggiornamento
+
+</button>
+
+</section>
+
+<section class="dashboard-card">
+
+
+<h2>
+Azioni rapide
+</h2>
+
+
+<button 
+class="main-button"
+onclick="location.href='corse.html'">
+
+Nuova corsa
+
+</button>
+
+
+
+
+<button 
+class="main-button"
+onclick="attivaSOS()">
+
+SOS
+
+</button>
+
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+
+
+
+<nav class="bottom-nav">
+
+
+
+<a class="active"
+href="index.html">
+
+Home
+
+</a>
+
+
+
+
+<a href="corse.html">
+
+Corse
+
+</a>
+
+
+
+
+<a href="turno.html">
+
+Turno
+
+</a>
+
+
+
+
+<a href="sos.html">
+
+SOS
+
+</a>
+
+
+
+
+<a href="profilo.html">
+
+Profilo
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+
+</html>
