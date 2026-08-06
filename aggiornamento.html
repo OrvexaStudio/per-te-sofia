@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aggiornamento TaxiPilot</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<main class="welcome-container">
+
+
+<section class="welcome-card">
+
+
+<img 
+src="logo.png"
+class="welcome-logo"
+>
+
+
+<h1>
+Nuovo aggiornamento disponibile
+</h1>
+
+
+<p class="welcome-subtitle">
+
+È disponibile una nuova versione di TaxiPilot con miglioramenti e nuove funzioni.
+
+</p>
+
+
+
+<div class="feature-box">
+
+<h3>
+Cosa cambia
+</h3>
+
+<ul>
+
+<li>Introdotto il nuovo sistema di aggiornamento dell'applicazione.</li>
+
+<li>Aggiunto il suggerimento automatico della tariffa tramite indirizzi inseriti.</li>
+
+<li>Aggiunto l'assistente intelligente nella Home con saluto dinamico, riepilogo delle corse giornaliere e informazioni sulla prossima corsa.</li>
+
+<li>Aggiunto il calcolo del tempo mancante alla prossima corsa e il suggerimento operativo per partire in anticipo quando necessario.</li>
+
+<li>Aggiunta la visualizzazione del turno attivo con cronometro.</li>
+
+<li>Aggiunta la gestione clienti bloccati (Blacklist) per evitare nuovi servizi verso clienti problematici.</li>
+
+<li>Aggiunta la gestione dei trasferimenti aeroportuali con riconoscimento automatico della parola "aeroporto".</li>
+
+<li>Aggiunta la possibilità di inserire il numero del volo nelle corse aeroportuali.</li>
+
+<li>Aggiunto il pulsante "Monitora volo" con collegamento diretto a FlightRadar24.</li>
+
+<li>Migliorata la gestione generale delle corse e dell'organizzazione del lavoro.</li>
+
+</ul>
+
+</div>
+
+
+
+<button
+class="main-button"
+onclick="aggiornaApp()"
+>
+Aggiorna TaxiPilot
+</button>
+
+
+
+</section>
+
+
+</main>
+
+
+<script>
+
+function aggiornaApp(){
+
+localStorage.setItem(
+"aggiornamentoVisto",
+"true"
+);
+
+window.location.href =
+"https://orvexastudio.github.io/TaxiPilot/";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
