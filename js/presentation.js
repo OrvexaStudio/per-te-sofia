@@ -4,7 +4,7 @@
    PRESENTATION ENGINE
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
     const presentation = document.getElementById("presentation");
     const website = document.getElementById("mainWebsite");
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const progressBar = document.getElementById("progressBar");
 
     let currentSlide = 0;
+    let currentVersion = null;
 
     const totalSlides = slides.length;
 
@@ -30,28 +31,44 @@ document.addEventListener("DOMContentLoaded", () => {
        INITIALIZATION
     ===================================== */
 
-    function initializePresentation() {
+    async function initializePresentation() {
 
-        const shouldShowPresentation = hasNewContentVersion();
+        // Recupera la versione pubblicata su GitHub
+        currentVersion = await getPublishedSiteVersion();
+
+        // Se non riesce a recuperarla, mostra comunque il sito
+        if (!currentVersion) {
+            openWebsite();
+            return;
+        }
+
+        const shouldShowPresentation =
+            hasNewContentVersion(currentVersion);
 
         if (!shouldShowPresentation) {
-
-            presentation.classList.add("hide");
-
-            website.classList.remove("hidden");
-
-            requestAnimationFrame(() => {
-                website.classList.add("visible");
-            });
-
+            openWebsite();
             return;
         }
 
         presentation.classList.remove("hide");
-
         website.classList.add("hidden");
 
         showSlide(0);
+    }
+
+
+    /* =====================================
+       OPEN WEBSITE
+    ===================================== */
+
+    function openWebsite() {
+
+        presentation.classList.add("hide");
+        website.classList.remove("hidden");
+
+        requestAnimationFrame(() => {
+            website.classList.add("visible");
+        });
 
     }
 
@@ -76,9 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-
-        /* COUNTER */
-
         const currentNumber = String(
             currentSlide + 1
         ).padStart(2, "0");
@@ -90,29 +104,21 @@ document.addEventListener("DOMContentLoaded", () => {
         slideCounter.textContent =
             `${currentNumber} / ${totalNumber}`;
 
-
-        /* PROGRESS */
-
         const progress =
             ((currentSlide + 1) / totalSlides) * 100;
 
         progressBar.style.width = `${progress}%`;
 
-
-        /* BUTTON LABEL */
-
         if (currentSlide === totalSlides - 1) {
 
-            nextButtonText.textContent = "Entra nel nostro mondo";
+            nextButtonText.textContent =
+                "Entra nel nostro mondo";
 
         } else {
 
             nextButtonText.textContent = "Continua";
 
         }
-
-
-        /* PREVIOUS BUTTON */
 
         previousButton.style.visibility =
             currentSlide === 0 ? "hidden" : "visible";
@@ -146,9 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function previousSlideAction() {
 
         if (currentSlide > 0) {
-
             showSlide(currentSlide - 1);
-
         }
 
     }
@@ -160,15 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function finishPresentation() {
 
-        /*
-            Salviamo la versione solo quando
-            la presentazione è stata completata.
-        */
-
-        saveViewedVersion();
+        // Salva esattamente la versione appena visualizzata
+        saveViewedVersion(currentVersion);
 
         presentation.classList.add("hide");
-
         website.classList.remove("hidden");
 
         requestAnimationFrame(() => {
@@ -189,10 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
        EVENT LISTENERS
     ===================================== */
 
-    nextButton.addEventListener(
-        "click",
-        nextSlide
-    );
+    nextButton.addEventListener("click", nextSlide);
 
     previousButton.addEventListener(
         "click",
@@ -237,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
     presentation.addEventListener("touchend", event => {
 
         const touchEndX = event.changedTouches[0].screenX;
-
         const difference = touchStartX - touchEndX;
 
         if (Math.abs(difference) < 70) {
