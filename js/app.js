@@ -22,9 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             content.presentation.special
         ];
 
-        const targetSlides = [
-            1, 2, 3, 4
-        ];
+        const targetSlides = [1, 2, 3, 4];
 
         targetSlides.forEach((slideIndex, index) => {
 
@@ -70,8 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "#story .section-heading p"
         );
 
-        introduction.textContent =
-            content.story.introduction;
+        if (!container || !introduction) return;
+
+        introduction.textContent = content.story.introduction;
 
         container.innerHTML = "";
 
@@ -83,22 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.innerHTML = `
                 <div class="card-icon">♡</div>
-
                 <span class="card-date"></span>
-
                 <h3></h3>
-
                 <p></p>
             `;
 
-            card.querySelector(".card-date").textContent =
-                moment.date;
-
-            card.querySelector("h3").textContent =
-                moment.title;
-
-            card.querySelector("p").textContent =
-                moment.description;
+            card.querySelector(".card-date").textContent = moment.date;
+            card.querySelector("h3").textContent = moment.title;
+            card.querySelector("p").textContent = moment.description;
 
             container.appendChild(card);
 
@@ -113,26 +104,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderLetter() {
 
-        const greeting = document.querySelector(
-            ".letter-greeting"
-        );
+        const greeting = document.querySelector(".letter-greeting");
+        const letter = document.querySelector(".letter-text");
+        const signature = document.querySelector(".letter-signature");
 
-        const letter = document.querySelector(
-            ".letter-text"
-        );
+        if (greeting) greeting.textContent = content.letter.greeting;
+        if (letter) letter.textContent = content.letter.content;
+        if (signature) signature.textContent = content.letter.signature;
 
-        const signature = document.querySelector(
-            ".letter-signature"
-        );
+    }
 
-        greeting.textContent =
-            content.letter.greeting;
 
-        letter.textContent =
-            content.letter.content;
+    /* =====================================
+       LOAD AUTOMATIC MEMORIES
+    ===================================== */
 
-        signature.textContent =
-            content.letter.signature;
+    async function loadMemories() {
+
+        try {
+
+            const response = await fetch("./ricordi.json", {
+                cache: "no-store"
+            });
+
+            if (!response.ok) {
+                throw new Error("Impossibile caricare le fotografie");
+            }
+
+            const images = await response.json();
+
+            renderMemories(images);
+
+        } catch (error) {
+
+            console.error("Errore nella galleria:", error);
+
+            // Mantiene le fotografie eventualmente
+            // presenti nel vecchio content.js.
+            renderMemories(
+                content.memories.photos.map(photo => ({
+                    path: photo.image,
+                    title: photo.title,
+                    description: photo.description
+                }))
+            );
+
+        }
 
     }
 
@@ -141,82 +158,33 @@ document.addEventListener("DOMContentLoaded", () => {
        RENDER MEMORIES
     ===================================== */
 
-    function renderMemories() {
+    function renderMemories(images) {
 
-        const container = document.getElementById(
-            "memoryGallery"
-        );
+        const container = document.getElementById("memoryGallery");
 
         const introduction = document.querySelector(
             "#memories .section-heading p"
         );
 
-        const note = document.querySelector(
-            ".gallery-note"
-        );
+        const note = document.querySelector(".gallery-note");
 
-        introduction.textContent =
-            content.memories.introduction;
+        if (!container) return;
 
-        note.textContent =
-            content.memories.note;
+        if (introduction) {
+            introduction.textContent = content.memories.introduction;
+        }
+
+        if (note) {
+            note.textContent = content.memories.note;
+        }
 
         container.innerHTML = "";
 
-        content.memories.photos.forEach(photo => {
-
-            if (!isValidImagePath(photo.image)) {
-                return;
-            }
-
-            const card = document.createElement("article");
-
-            card.className = "memory-card";
-
-            const image = document.createElement("img");
-
-            image.src = photo.image;
-
-            image.alt = photo.title || "Un nostro ricordo";
-
-            image.loading = "lazy";
-
-            const imageContainer = document.createElement("div");
-
-            imageContainer.className =
-                "memory-image-placeholder";
-
-            imageContainer.appendChild(image);
-
-            const caption = document.createElement("div");
-
-            caption.className = "memory-caption";
-
-            const title = document.createElement("h3");
-
-            title.textContent = photo.title || "";
-
-            const description = document.createElement("p");
-
-            description.textContent =
-                photo.description || "";
-
-            caption.appendChild(title);
-            caption.appendChild(description);
-
-            card.appendChild(imageContainer);
-            card.appendChild(caption);
-
-            container.appendChild(card);
-
-        });
-
-        if (content.memories.photos.length === 0) {
+        if (!images || images.length === 0) {
 
             const empty = document.createElement("div");
 
             empty.className = "empty-memories";
-
             empty.innerHTML = `
                 <span>♡</span>
                 <p>I nostri ricordi troveranno posto qui.</p>
@@ -224,7 +192,135 @@ document.addEventListener("DOMContentLoaded", () => {
 
             container.appendChild(empty);
 
+            return;
         }
+
+        images.forEach((item, index) => {
+
+            // Supporta sia il nuovo formato automatico
+            // sia il vecchio formato di content.js.
+            const path = typeof item === "string"
+                ? item
+                : item.path || item.image;
+
+            const title = typeof item === "string"
+                ? ""
+                : item.title || "";
+
+            const description = typeof item === "string"
+                ? ""
+                : item.description || "";
+
+            if (!path || !/\.(jpg|jpeg|png|webp|avif)$/i.test(path)) {
+                return;
+            }
+
+            const card = document.createElement("article");
+            card.className = "memory-card";
+
+            const imageContainer = document.createElement("div");
+            imageContainer.className = "memory-image-placeholder";
+
+            const image = document.createElement("img");
+
+            image.src = path;
+            image.alt = title || `Un nostro ricordo ${index + 1}`;
+            image.loading = "lazy";
+
+            image.addEventListener("error", () => {
+                card.remove();
+            });
+
+            imageContainer.appendChild(image);
+
+            const caption = document.createElement("div");
+            caption.className = "memory-caption";
+
+            if (title) {
+                const heading = document.createElement("h3");
+                heading.textContent = title;
+                caption.appendChild(heading);
+            }
+
+            if (description) {
+                const paragraph = document.createElement("p");
+                paragraph.textContent = description;
+                caption.appendChild(paragraph);
+            }
+
+            card.appendChild(imageContainer);
+            card.appendChild(caption);
+
+            // Apertura fotografia ingrandita
+            card.addEventListener("click", () => {
+                openMemoryImage(path, title);
+            });
+
+            card.style.cursor = "pointer";
+
+            container.appendChild(card);
+
+        });
+
+        // Attiva le animazioni anche sulle nuove fotografie
+        initializeScrollAnimations();
+
+    }
+
+
+    /* =====================================
+       IMAGE LIGHTBOX
+    ===================================== */
+
+    function openMemoryImage(path, title) {
+
+        let lightbox = document.getElementById("memoryLightbox");
+
+        if (!lightbox) {
+
+            lightbox = document.createElement("div");
+
+            lightbox.id = "memoryLightbox";
+            lightbox.className = "memory-lightbox";
+
+            lightbox.innerHTML = `
+                <button class="lightbox-close" aria-label="Chiudi">×</button>
+                <img src="" alt="">
+                <p></p>
+            `;
+
+            document.body.appendChild(lightbox);
+
+            lightbox.addEventListener("click", event => {
+
+                if (
+                    event.target === lightbox ||
+                    event.target.classList.contains("lightbox-close")
+                ) {
+                    lightbox.classList.remove("active");
+                }
+
+            });
+
+            document.addEventListener("keydown", event => {
+
+                if (event.key === "Escape") {
+                    lightbox.classList.remove("active");
+                }
+
+            });
+
+        }
+
+        const lightboxImage = lightbox.querySelector("img");
+        const lightboxTitle = lightbox.querySelector("p");
+
+        lightboxImage.src = path;
+        lightboxImage.alt = title || "Un nostro ricordo";
+
+        lightboxTitle.textContent = title || "";
+
+        lightbox.classList.add("active");
 
     }
 
@@ -235,19 +331,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderSpecial() {
 
-        const message = document.querySelector(
-            ".special-content p"
-        );
+        const message = document.querySelector(".special-content p");
+        const signature = document.querySelector(".special-signature");
 
-        const signature = document.querySelector(
-            ".special-signature"
-        );
+        if (message) {
+            message.textContent = content.special.message;
+        }
 
-        message.textContent =
-            content.special.message;
-
-        signature.textContent =
-            content.special.signature;
+        if (signature) {
+            signature.textContent = content.special.signature;
+        }
 
     }
 
@@ -258,22 +351,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function initializeNavigation() {
 
-        const toggle = document.getElementById(
-            "menuToggle"
-        );
+        const toggle = document.getElementById("menuToggle");
+        const navigation = document.getElementById("navigation");
 
-        const navigation = document.getElementById(
-            "navigation"
-        );
+        const links = document.querySelectorAll(".nav-link");
 
-        const links = document.querySelectorAll(
-            ".nav-link"
-        );
+        if (!toggle || !navigation) return;
 
         toggle.addEventListener("click", () => {
-
             navigation.classList.toggle("open");
-
         });
 
         links.forEach(link => {
@@ -301,28 +387,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function initializeScrollNavigation() {
 
-        const sections = document.querySelectorAll(
-            ".website-section"
-        );
+        const sections = document.querySelectorAll(".website-section");
+        const links = document.querySelectorAll(".nav-link");
 
-        const links = document.querySelectorAll(
-            ".nav-link"
-        );
+        if (!("IntersectionObserver" in window)) return;
 
         const observer = new IntersectionObserver(entries => {
 
             entries.forEach(entry => {
 
-                if (!entry.isIntersecting) {
-                    return;
-                }
+                if (!entry.isIntersecting) return;
 
                 links.forEach(link => {
 
                     link.classList.toggle(
                         "active",
-                        link.getAttribute("href") ===
-                        `#${entry.target.id}`
+                        link.getAttribute("href") === `#${entry.target.id}`
                     );
 
                 });
@@ -333,9 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
             threshold: 0.35
         });
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        sections.forEach(section => observer.observe(section));
 
     }
 
@@ -350,6 +428,13 @@ document.addEventListener("DOMContentLoaded", () => {
             ".romantic-card, .letter-card, .memory-card, .section-heading, .special-content"
         );
 
+        if (!("IntersectionObserver" in window)) {
+            elements.forEach(element => {
+                element.classList.add("revealed");
+            });
+            return;
+        }
+
         const observer = new IntersectionObserver(entries => {
 
             entries.forEach(entry => {
@@ -357,7 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (entry.isIntersecting) {
 
                     entry.target.classList.add("revealed");
-
                     observer.unobserve(entry.target);
 
                 }
@@ -370,8 +454,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         elements.forEach(element => {
 
-            element.classList.add("reveal");
+            if (element.classList.contains("revealed")) return;
 
+            element.classList.add("reveal");
             observer.observe(element);
 
         });
@@ -387,9 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const container = document.getElementById("particles");
 
-        if (!container) {
-            return;
-        }
+        if (!container) return;
 
         const particleCount = window.innerWidth < 650 ? 12 : 24;
 
@@ -429,8 +512,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderLetter();
 
-    renderMemories();
-
     renderSpecial();
 
     initializeNavigation();
@@ -440,5 +521,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeScrollAnimations();
 
     createParticles();
+
+    // Carica la galleria senza bloccare il resto del sito
+    loadMemories();
 
 });
