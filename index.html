@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#260b20">
+
+    <title>Per te, Sofia</title>
+
+    <meta name="description" content="Un piccolo mondo fatto di ricordi, parole e momenti speciali.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- SFONDO ANIMATO -->
+    <div class="ambient-background">
+        <div class="ambient-glow glow-one"></div>
+        <div class="ambient-glow glow-two"></div>
+        <div class="ambient-glow glow-three"></div>
+        <div id="particles"></div>
+    </div>
+
+    <!-- SCHERMATA DI PRESENTAZIONE -->
+    <section id="presentation" class="presentation">
+
+        <div class="presentation-top">
+            <span class="presentation-brand">P E R   T E</span>
+            <span class="presentation-counter" id="slideCounter">01 / 06</span>
+        </div>
+
+        <div class="presentation-progress">
+            <div id="progressBar"></div>
+        </div>
+
+        <div class="slides-container">
+
+            <!-- SLIDE 1 -->
+            <article class="presentation-slide active" data-slide="0">
+                <div class="slide-content">
+                    <span class="eyebrow">UN PICCOLO MONDO</span>
+
+                    <h1>
+                        Per te,<br>
+                        <span class="highlight">Sofia.</span>
+                    </h1>
+
+                    <div class="decorative-line"></div>
+
+                    <p class="slide-description">
+                        Un posto speciale, per una persona speciale.
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE 2 -->
+            <article class="presentation-slide" data-slide="1">
+                <div class="slide-content">
+                    <span class="eyebrow">TUTTO HA UN INIZIO</span>
+
+                    <h2>
+                        La nostra<br>
+                        <span class="highlight">storia.</span>
+                    </h2>
+
+                    <p class="slide-description">
+                        <!-- TESTO PERSONALE DA INSERIRE -->
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE 3 -->
+            <article class="presentation-slide" data-slide="2">
+                <div class="slide-content">
+                    <span class="eyebrow">PAROLE DAL CUORE</span>
+
+                    <h2>
+                        Quello che<br>
+                        <span class="highlight">sento.</span>
+                    </h2>
+
+                    <p class="slide-description">
+                        <!-- TESTO PERSONALE DA INSERIRE -->
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE 4 -->
+            <article class="presentation-slide" data-slide="3">
+                <div class="slide-content">
+                    <span class="eyebrow">ISTANTI PREZIOSI</span>
+
+                    <h2>
+                        I nostri<br>
+                        <span class="highlight">ricordi.</span>
+                    </h2>
+
+                    <p class="slide-description">
+                        <!-- TESTO PERSONALE DA INSERIRE -->
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE 5 -->
+            <article class="presentation-slide" data-slide="4">
+                <div class="slide-content">
+                    <span class="eyebrow">QUALCOSA DI SPECIALE</span>
+
+                    <h2>
+                        Per te,<br>
+                        <span class="highlight">sempre.</span>
+                    </h2>
+
+                    <p class="slide-description">
+                        <!-- TESTO PERSONALE DA INSERIRE -->
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE 6 -->
+            <article class="presentation-slide" data-slide="5">
+                <div class="slide-content final-slide">
+                    <div class="final-heart">♡</div>
+
+                    <span class="eyebrow">BENVENUTA</span>
+
+                    <h2>
+                        Questo è<br>
+                        <span class="highlight">il nostro mondo.</span>
+                    </h2>
+
+                    <p class="slide-description">
+                        Tutto quello che troverai qui è dedicato a noi.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="presentation-controls">
+
+            <button id="previousSlide" class="previous-button" type="button">
+                Indietro
+            </button>
+
+            <button id="nextSlide" class="next-button" type="button">
+                <span id="nextButtonText">Continua</span>
+                <span class="button-arrow">→</span>
+            </button>
+
+        </div>
+
+        <div class="presentation-footer">
+            REALIZZATO CON AMORE
+        </div>
+
+    </section>
+
+
+    <!-- SITO PRINCIPALE -->
+    <main id="mainWebsite" class="main-website hidden">
+
+        <!-- HEADER -->
+        <header class="site-header">
+
+            <a href="#home" class="site-logo">
+                <span class="logo-symbol">♡</span>
+                <span>Per te, Sofia</span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Apri menu">
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="navigation" id="navigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#story" class="nav-link">La nostra storia</a>
+                <a href="#letter" class="nav-link">Una lettera</a>
+                <a href="#memories" class="nav-link">Ricordi</a>
+                <a href="#special" class="nav-link">Per te</a>
+            </nav>
+
+        </header>
+
+
+        <!-- HOME -->
+        <section id="home" class="website-section hero-section">
+
+            <div class="hero-content">
+
+                <span class="eyebrow">UN POSTO SOLO NOSTRO</span>
+
+                <h1>
+                    Un piccolo<br>
+                    <span class="highlight">universo.</span>
+                </h1>
+
+                <div class="decorative-line"></div>
+
+                <p class="hero-description">
+                    <!-- INSERISCI QUI IL TUO TESTO -->
+                </p>
+
+                <a href="#story" class="elegant-button">
+                    Scopri il nostro mondo
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <div class="hero-decoration">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit-heart">♡</div>
+            </div>
+
+        </section>
+
+
+        <!-- LA NOSTRA STORIA -->
+        <section id="story" class="website-section content-section">
+
+            <div class="section-heading">
+                <span class="eyebrow">CAPITOLO I</span>
+                <h2>La nostra <span class="highlight">storia.</span></h2>
+                <p> <!-- BREVE INTRODUZIONE --> </p>
+            </div>
+
+            <div id="storyCards" class="cards-grid">
+
+                <!-- DUPLICA QUESTE CARD PER AGGIUNGERE MOMENTI -->
+
+                <article class="romantic-card story-card">
+                    <div class="card-icon">♡</div>
+                    <span class="card-date"><!-- DATA --> </span>
+                    <h3><!-- TITOLO DEL RICORDO --></h3>
+                    <p><!-- DESCRIZIONE DEL MOMENTO --></p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- LETTERA -->
+        <section id="letter" class="website-section content-section letter-section">
+
+            <div class="section-heading">
+                <span class="eyebrow">CAPITOLO II</span>
+                <h2>Una lettera <span class="highlight">per te.</span></h2>
+            </div>
+
+            <article class="letter-card">
+
+                <div class="letter-decoration">♡</div>
+
+                <div class="letter-body">
+                    <p class="letter-greeting"><!-- SALUTO --> </p>
+
+                    <div class="letter-text">
+                        <!-- SCRIVI QUI LA TUA LETTERA -->
+                    </div>
+
+                    <p class="letter-signature">
+                        <!-- LA TUA FIRMA -->
+                    </p>
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- RICORDI -->
+        <section id="memories" class="website-section content-section memories-section">
+
+            <div class="section-heading">
+                <span class="eyebrow">CAPITOLO III</span>
+                <h2>I nostri <span class="highlight">ricordi.</span></h2>
+
+                <p>
+                    <!-- BREVE INTRODUZIONE -->
+                </p>
+            </div>
+
+            <div id="memoryGallery" class="memory-gallery">
+
+                <!--
+                    AGGIUNGI LE FOTOGRAFIE NELLA CARTELLA assets/images/
+                    E INSERISCI QUI LE RELATIVE CARD.
+                -->
+
+                <article class="memory-card">
+                    <div class="memory-image-placeholder">
+                        <span>♡</span>
+                    </div>
+
+                    <div class="memory-caption">
+                        <h3><!-- TITOLO --> </h3>
+                        <p><!-- DESCRIZIONE --> </p>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="gallery-note">
+                Questo spazio è in continua evoluzione.
+                Nuove fotografie, ricordi e momenti speciali
+                verranno aggiunti e aggiornati nel tempo.
+            </p>
+
+        </section>
+
+
+        <!-- SORPRESA FINALE -->
+        <section id="special" class="website-section content-section special-section">
+
+            <div class="special-content">
+
+                <span class="eyebrow">CAPITOLO IV</span>
+
+                <div class="special-heart">♡</div>
+
+                <h2>
+                    Qualcosa di<br>
+                    <span class="highlight">speciale.</span>
+                </h2>
+
+                <p>
+                    <!-- DEDICA FINALE -->
+                </p>
+
+                <div class="decorative-line"></div>
+
+                <span class="special-signature">
+                    <!-- FIRMA -->
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+
+            <div class="footer-heart">♡</div>
+
+            <p>Un piccolo mondo, tutto nostro.</p>
+
+            <span>PER TE, SOFIA</span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- SCRIPT -->
+    <script src="js/content.js"></script>
+    <script src="js/presentation.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
