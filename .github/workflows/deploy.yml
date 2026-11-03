@@ -32,6 +32,31 @@ jobs:
         run: |
           echo "{\"version\":\"${GITHUB_SHA}\"}" > site-version.json
 
+
+      - name: Generate memories gallery
+        run: |
+          python3 - <<'PY'
+          import os
+          import json
+
+          folder = "assets/images/ricordi"
+          extensions = (".jpg", ".jpeg", ".png", ".webp", ".avif")
+
+          images = []
+
+          if os.path.isdir(folder):
+              for root, dirs, files in os.walk(folder):
+                  for filename in files:
+                      if filename.lower().endswith(extensions):
+                          path = os.path.join(root, filename)
+                          images.append(path.replace(os.sep, "/"))
+
+          images.sort()
+
+          with open("ricordi.json", "w", encoding="utf-8") as file:
+              json.dump(images, file, ensure_ascii=False, indent=2)
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
