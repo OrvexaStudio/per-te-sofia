@@ -41,11 +41,17 @@ const SITE_CONTENT = {
 
         moments: [
             {
-                date: "12/12/2020",
-                title: "esempio",
-                description: "esempio"
+                date: "03/09/2026",
+                title: "Il nostro primo messaggio",
+                description: "Il nostro primo messaggio è stato per il video della Maria, poteva andare decisamente meglio."
             }
 
+                           ,
+                {
+                    date: "29/09 - oggi",
+                    title: "Da quanto scriviamo",
+                    description: "Scriviamo da un po', ancora poco, "
+                }
             /*
                 Per aggiungere un altro momento:
 
