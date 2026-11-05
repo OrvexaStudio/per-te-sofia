@@ -1,4 +1,3 @@
-
 /* =========================================
    PER TE, SOFIA
    CONTENT MANAGER
@@ -25,26 +24,26 @@ const SITE_CONTENT = {
 
     // PAGINA INIZIALE
     home: {
-        introduction: ""
+        introduction: "esempio"
     },
 
     // PRESENTAZIONE INIZIALE
     presentation: {
-        story: "",
-        feelings: "",
-        memories: "",
-        special: ""
+        story: "esempio",
+        feelings: "esempio",
+        memories: "esempio",
+        special: "esempio"
     },
 
     // LA VOSTRA STORIA
     story: {
-        introduction: "",
+        introduction: "esempio",
 
         moments: [
             {
-                date: "",
-                title: "",
-                description: ""
+                date: "12/12/2020",
+                title: "esempio",
+                description: "esempio"
             }
 
             /*
@@ -62,35 +61,41 @@ const SITE_CONTENT = {
 
     // LETTERA
     letter: {
-        greeting: "",
-        content: "",
-        signature: ""
+        greeting: "esempio",
+        content: "esempio",
+        signature: "esempio"
     },
 
-    // RICORDI E FOTOGRAFIE
+    // RICORDI: LE COSE CHE FATE INSIEME
     memories: {
-        introduction: "",
+        introduction: "esempio",
 
-        photos: [
+        moments: [
+            {
+                date: "esempio",
+                title: "esempio",
+                description: "esempio"
+            }
+
             /*
-                Esempio per aggiungere una fotografia:
+                Per aggiungere un altro ricordo:
 
+                ,
                 {
-                    image: "assets/images/foto1.jpg",
+                    date: "",
                     title: "",
-                    description: "",
-                    date: ""
+                    description: ""
                 }
             */
         ],
 
-        note: "Questo spazio è in continua evoluzione. Nuove fotografie, ricordi e momenti speciali verranno aggiunti e aggiornati nel tempo."
+        note: "Questo spazio è in continua evoluzione. Nuovi ricordi e momenti speciali verranno aggiunti e aggiornati nel tempo."
     },
 
     // DEDICA FINALE
     special: {
-        message: "",
-        signature: ""
+        message: "esempio",
+        signature: "esempio"
     }
 
 };
@@ -177,6 +182,12 @@ function getSiteContent() {
 /* =========================================
    IMAGE VALIDATION
 ========================================= */
+
+/*
+    La funzione viene mantenuta per compatibilità
+    con il resto del sito, anche se nella sezione
+    Ricordi non utilizziamo più fotografie.
+*/
 
 function isValidImagePath(path) {
 
