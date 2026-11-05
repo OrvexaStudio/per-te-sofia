@@ -50,7 +50,19 @@ const SITE_CONTENT = {
                 {
                     date: "29/09 - oggi",
                     title: "Da quanto scriviamo",
-                    description: "Scriviamo da un po', ancora poco, "
+                    description: "Scriviamo da un po', ancora poco, dovremo farlo per il resto dei nostri giorni."
+                }
+                           ,
+                {
+                    date: "30/10/2026",
+                    title: "DICIOTTESIMO MARIA",
+                    description: "Una delle cose più belle che abbiamo fatto, stare abbracciato con te è bellissimo."
+                }
+                           ,
+                {
+                    date: "31/10/2026",
+                    title: "Netflix insieme",
+                    description: "Questa è la cosa più bella che abbiamo fatto, fino ad ora. Siamo stati tutto il tempo abbracciati, penso che cosa più bella non possa esserci. La voglia di baciarti era tanta."
                 }
             /*
                 Per aggiungere un altro momento:
