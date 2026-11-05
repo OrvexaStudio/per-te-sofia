@@ -64,6 +64,18 @@ const SITE_CONTENT = {
                     title: "Netflix insieme",
                     description: "Questa è la cosa più bella che abbiamo fatto, fino ad ora. Siamo stati tutto il tempo abbracciati, penso che cosa più bella non possa esserci. La voglia di baciarti era tanta."
                 }
+                           ,
+                {
+                    date: "31/10/2026",
+                    title: "Quel MESSAGGIO",
+                    description: "Il messaggio in cui ci siamo detti che ci stavamo innamorando, indescrivibile è l'emozione che ho provato."
+                }
+                           ,
+                {
+                    date: "XSPEMPRE",
+                    title: "Il tempo in cui staremo insieme",
+                    description: "Ti voglio, ora e per sempre."
+                }
             /*
                 Per aggiungere un altro momento:
 
