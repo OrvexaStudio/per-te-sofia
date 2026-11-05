@@ -125,7 +125,7 @@ const SITE_CONTENT = {
     // DEDICA FINALE
     special: {
         message: "Ti amo infinitamente, non ti cambierei per nulla al mondo. Come te, nessuna. Ti amo.",
-        signature: "Checco tuo❤️"
+        signature: "Checco tuo"
     }
 
 };
