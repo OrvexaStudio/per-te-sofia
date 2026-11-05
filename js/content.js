@@ -61,9 +61,9 @@ const SITE_CONTENT = {
 
     // LETTERA
     letter: {
-        greeting: "esempio",
-        content: "esempio",
-        signature: "esempio"
+        greeting: "Cara Sofia,",
+        content: "ti conosco da poco ma ti amo come se ti conoscessi da sempre. Non ricordo precisamente perché abbiamo iniziato a fare chiamate lunghissime che non finivano più, ma potrei dirti tranquillamente quanto mi faccia stare bene farle e quando amo stare con te. Ti amo Sofia, e lo farò sempre.",
+        signature: "Checco"
     },
 
     // RICORDI: LE COSE CHE FATE INSIEME
