@@ -24,7 +24,7 @@ const SITE_CONTENT = {
 
     // PAGINA INIZIALE
     home: {
-        introduction: "esempio"
+        introduction: "Ciao Sofi, forse ti sembrerà strano il modo con cui ti sto parlando ma, a me, le cose troppo semplici e scontate non mi piacciono. Questo sito, o qualunque cosa esso sia, può dirti tante cose: verrà aggiornato, potrei scriverti qualcosa in ogni momento."
     },
 
     // PRESENTAZIONE INIZIALE
