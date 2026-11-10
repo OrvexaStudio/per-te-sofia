@@ -72,9 +72,14 @@ const SITE_CONTENT = {
                 }
                            ,
                 {
-                    date: "XSPEMPRE",
-                    title: "Il tempo in cui staremo insieme",
-                    description: "Ti voglio, ora e per sempre."
+                    date: "07/11/2026",
+                    title: "IL NOSTRO PRIMO BACIO",
+                    description: "Indescrivibile, indimenticabile, semplicemente unico."
+                }
+            {
+                    date: "09/11/2026",
+                    title: "Il giorno in cui ci siamo fidanzati",
+                    description: "Finalmente è arrivato il giorno che aspettavo tanto."
                 }
             /*
                 Per aggiungere un altro momento:
