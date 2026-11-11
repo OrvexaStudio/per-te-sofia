@@ -130,7 +130,7 @@ const SITE_CONTENT = {
     // DEDICA FINALE
     special: {
         message: "Ti amo infinitamente, non ti cambierei per nulla al mondo. Come te, nessuna. Sei la differenza in un mondo che fa acqua da tutte le parti. E tu, sei la toppa di questo mondo.",
-        signature: "Checco tuo"
+        signature: "Checco TUO"
     }
 
 };
