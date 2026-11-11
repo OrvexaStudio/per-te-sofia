@@ -99,6 +99,168 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
+       MILESTONES - DATE MANAGEMENT
+    ===================================== */
+
+    function getLocalDateString() {
+
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+
+    function isMilestoneCompleted(moment, today) {
+
+        // I traguardi senza data possono essere
+        // già raggiunti, come il primo "ti amo".
+        if (!moment.date) {
+            return moment.type === "completed";
+        }
+
+        // Le date future rimangono in attesa.
+        // Quelle odierne o passate risultano raggiunte.
+        return moment.date <= today;
+
+    }
+
+
+    /* =====================================
+       MILESTONES - RENDER
+    ===================================== */
+
+    function renderMilestones() {
+
+        const container = document.getElementById(
+            "milestoneTimeline"
+        );
+
+        const introduction = document.getElementById(
+            "milestoneIntroduction"
+        );
+
+        if (!container || !content.milestones) return;
+
+        const milestones = content.milestones.moments || [];
+
+        if (introduction) {
+            introduction.textContent =
+                content.milestones.introduction || "";
+        }
+
+        container.innerHTML = "";
+
+        if (milestones.length === 0) return;
+
+        const today = getLocalDateString();
+
+        const completedStates = milestones.map(moment =>
+            isMilestoneCompleted(moment, today)
+        );
+
+        const lastCompletedIndex = completedStates.lastIndexOf(true);
+
+        const progress = milestones.length > 1
+            ? Math.max(
+                0,
+                lastCompletedIndex / (milestones.length - 1)
+            ) * 100
+            : completedStates[0] ? 100 : 0;
+
+        container.style.setProperty(
+            "--timeline-progress",
+            `${progress}%`
+        );
+
+        milestones.forEach((moment, index) => {
+
+            const completed = completedStates[index];
+
+            const item = document.createElement("article");
+
+            item.className = [
+                "milestone-item",
+                completed ? "completed" : "upcoming"
+            ].join(" ");
+
+            item.dataset.milestoneIndex = index;
+
+            const marker = document.createElement("div");
+            marker.className = "milestone-marker";
+
+            const card = document.createElement("div");
+            card.className = "milestone-card";
+
+            const date = document.createElement("span");
+            date.className = "milestone-date";
+            date.textContent = moment.dateLabel || "";
+
+            const title = document.createElement("h3");
+            title.className = "milestone-title";
+            title.textContent = moment.title;
+
+            const description = document.createElement("p");
+            description.className = "milestone-description";
+            description.textContent = moment.description || "";
+
+            const status = document.createElement("span");
+            status.className = "milestone-status";
+
+            status.textContent = completed
+                ? "Traguardo raggiunto"
+                : "Ancora da vivere";
+
+            card.appendChild(date);
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(status);
+
+            item.appendChild(marker);
+            item.appendChild(card);
+
+            container.appendChild(item);
+
+        });
+
+        initializeScrollAnimations();
+
+    }
+
+
+    /* =====================================
+       AUTOMATIC MIDNIGHT UPDATE
+    ===================================== */
+
+    function scheduleMilestoneUpdate() {
+
+        const now = new Date();
+
+        const nextMidnight = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1,
+            0, 0, 1
+        );
+
+        const delay = nextMidnight.getTime() - now.getTime();
+
+        window.setTimeout(() => {
+
+            renderMilestones();
+
+            scheduleMilestoneUpdate();
+
+        }, delay);
+
+    }
+
+
+    /* =====================================
        RENDER LETTER
     ===================================== */
 
@@ -116,49 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================
-       LOAD AUTOMATIC MEMORIES
-    ===================================== */
-
-    async function loadMemories() {
-
-        try {
-
-            const response = await fetch("./ricordi.json", {
-                cache: "no-store"
-            });
-
-            if (!response.ok) {
-                throw new Error("Impossibile caricare le fotografie");
-            }
-
-            const images = await response.json();
-
-            renderMemories(images);
-
-        } catch (error) {
-
-            console.error("Errore nella galleria:", error);
-
-            // Mantiene le fotografie eventualmente
-            // presenti nel vecchio content.js.
-            renderMemories(
-                content.memories.photos.map(photo => ({
-                    path: photo.image,
-                    title: photo.title,
-                    description: photo.description
-                }))
-            );
-
-        }
-
-    }
-
-
-    /* =====================================
        RENDER MEMORIES
     ===================================== */
 
-    function renderMemories(images) {
+    function renderMemories() {
 
         const container = document.getElementById("memoryGallery");
 
@@ -180,7 +303,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         container.innerHTML = "";
 
-        if (!images || images.length === 0) {
+        const moments = content.memories.moments || [];
+
+        if (moments.length === 0) {
 
             const empty = document.createElement("div");
 
@@ -193,134 +318,37 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(empty);
 
             return;
+
         }
 
-        images.forEach((item, index) => {
-
-            // Supporta sia il nuovo formato automatico
-            // sia il vecchio formato di content.js.
-            const path = typeof item === "string"
-                ? item
-                : item.path || item.image;
-
-            const title = typeof item === "string"
-                ? ""
-                : item.title || "";
-
-            const description = typeof item === "string"
-                ? ""
-                : item.description || "";
-
-            if (!path || !/\.(jpg|jpeg|png|webp|avif)$/i.test(path)) {
-                return;
-            }
+        moments.forEach(moment => {
 
             const card = document.createElement("article");
+
             card.className = "memory-card";
-
-            const imageContainer = document.createElement("div");
-            imageContainer.className = "memory-image-placeholder";
-
-            const image = document.createElement("img");
-
-            image.src = path;
-            image.alt = title || `Un nostro ricordo ${index + 1}`;
-            image.loading = "lazy";
-
-            image.addEventListener("error", () => {
-                card.remove();
-            });
-
-            imageContainer.appendChild(image);
 
             const caption = document.createElement("div");
             caption.className = "memory-caption";
 
-            if (title) {
-                const heading = document.createElement("h3");
-                heading.textContent = title;
-                caption.appendChild(heading);
-            }
+            const date = document.createElement("span");
+            date.className = "memory-date";
+            date.textContent = moment.date || "";
 
-            if (description) {
-                const paragraph = document.createElement("p");
-                paragraph.textContent = description;
-                caption.appendChild(paragraph);
-            }
+            const title = document.createElement("h3");
+            title.textContent = moment.title || "";
 
-            card.appendChild(imageContainer);
+            const description = document.createElement("p");
+            description.textContent = moment.description || "";
+
+            caption.appendChild(date);
+            caption.appendChild(title);
+            caption.appendChild(description);
+
             card.appendChild(caption);
-
-            // Apertura fotografia ingrandita
-            card.addEventListener("click", () => {
-                openMemoryImage(path, title);
-            });
-
-            card.style.cursor = "pointer";
 
             container.appendChild(card);
 
         });
-
-        // Attiva le animazioni anche sulle nuove fotografie
-        initializeScrollAnimations();
-
-    }
-
-
-    /* =====================================
-       IMAGE LIGHTBOX
-    ===================================== */
-
-    function openMemoryImage(path, title) {
-
-        let lightbox = document.getElementById("memoryLightbox");
-
-        if (!lightbox) {
-
-            lightbox = document.createElement("div");
-
-            lightbox.id = "memoryLightbox";
-            lightbox.className = "memory-lightbox";
-
-            lightbox.innerHTML = `
-                <button class="lightbox-close" aria-label="Chiudi">×</button>
-                <img src="" alt="">
-                <p></p>
-            `;
-
-            document.body.appendChild(lightbox);
-
-            lightbox.addEventListener("click", event => {
-
-                if (
-                    event.target === lightbox ||
-                    event.target.classList.contains("lightbox-close")
-                ) {
-                    lightbox.classList.remove("active");
-                }
-
-            });
-
-            document.addEventListener("keydown", event => {
-
-                if (event.key === "Escape") {
-                    lightbox.classList.remove("active");
-                }
-
-            });
-
-        }
-
-        const lightboxImage = lightbox.querySelector("img");
-        const lightboxTitle = lightbox.querySelector("p");
-
-        lightboxImage.src = path;
-        lightboxImage.alt = title || "Un nostro ricordo";
-
-        lightboxTitle.textContent = title || "";
-
-        lightbox.classList.add("active");
 
     }
 
@@ -425,14 +453,18 @@ document.addEventListener("DOMContentLoaded", () => {
     function initializeScrollAnimations() {
 
         const elements = document.querySelectorAll(
-            ".romantic-card, .letter-card, .memory-card, .section-heading, .special-content"
+            ".romantic-card, .letter-card, .memory-card, " +
+            ".section-heading, .special-content, .milestone-item"
         );
 
         if (!("IntersectionObserver" in window)) {
+
             elements.forEach(element => {
                 element.classList.add("revealed");
             });
+
             return;
+
         }
 
         const observer = new IntersectionObserver(entries => {
@@ -510,7 +542,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderStory();
 
+    renderMilestones();
+
+    scheduleMilestoneUpdate();
+
     renderLetter();
+
+    renderMemories();
 
     renderSpecial();
 
@@ -521,8 +559,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeScrollAnimations();
 
     createParticles();
-
-    // Carica la galleria senza bloccare il resto del sito
-    loadMemories();
 
 });
