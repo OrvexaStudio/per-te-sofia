@@ -93,7 +93,61 @@ const SITE_CONTENT = {
             */
         ]
     },
+    // TIMELINE DEI NOSTRI TRAGUARDI
+    milestones: {
+        introduction: "Ogni storia è fatta di momenti speciali. Alcuni li abbiamo già vissuti, altri ci aspettano.",
 
+        moments: [
+            {
+                id: "first-kiss",
+                title: "Il nostro primo bacio",
+                date: "2026-11-07",
+                dateLabel: "7 novembre 2026",
+                description: "Indescrivibile, indimenticabile, semplicemente unico.",
+                type: "completed"
+            },
+            {
+                id: "first-love",
+                title: "Il primo ti amo",
+                date: null,
+                dateLabel: "Senza una data precisa",
+                description: "Ci sono parole e momenti che non hanno bisogno di un giorno sul calendario.",
+                type: "completed"
+            },
+            {
+                id: "relationship",
+                title: "Il nostro fidanzamento",
+                date: "2026-11-09",
+                dateLabel: "9 novembre 2026",
+                description: "Il giorno in cui abbiamo deciso di iniziare questo percorso insieme.",
+                type: "completed"
+            },
+            {
+                id: "first-month",
+                title: "Il primo mesiversario",
+                date: "2026-12-09",
+                dateLabel: "9 dicembre 2026",
+                description: "Il primo di tanti mesi insieme.",
+                type: "automatic"
+            },
+            {
+                id: "six-months",
+                title: "Il sesto mesiversario",
+                date: "2027-05-09",
+                dateLabel: "9 maggio 2027",
+                description: "Sei mesi di noi.",
+                type: "automatic"
+            },
+            {
+                id: "first-year",
+                title: "Il nostro primo anno",
+                date: "2027-11-09",
+                dateLabel: "9 novembre 2027",
+                description: "Un anno insieme. Il primo di tanti.",
+                type: "automatic"
+            }
+        ]
+    },
     // LETTERA
     letter: {
         greeting: "Cara Sofia,",
