@@ -160,11 +160,7 @@ const SITE_CONTENT = {
         introduction: "Qui verranno pubblicate le nostre esperienze, tutto quello che faremo insieme.",
 
         moments: [
-            {
-                date: "esempio",
-                title: "esempio",
-                description: "esempio"
-            }
+           
 
             /*
                 Per aggiungere un altro ricordo:
