@@ -75,7 +75,7 @@ const SITE_CONTENT = {
                     date: "07/11/2026",
                     title: "IL NOSTRO PRIMO BACIO",
                     description: "Indescrivibile, indimenticabile, semplicemente unico."
-                }
+                },
             {
                     date: "09/11/2026",
                     title: "Il giorno in cui ci siamo fidanzati",
