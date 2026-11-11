@@ -37,7 +37,7 @@ const SITE_CONTENT = {
 
     // LA VOSTRA STORIA
     story: {
-        introduction: "esempio",
+        introduction: "Qui verranno pubblicati i nostri momenti, solo i più belli, perchè mettere ogni secondo passato con te è impossibile.",
 
         moments: [
             {
@@ -103,7 +103,7 @@ const SITE_CONTENT = {
 
     // RICORDI: LE COSE CHE FATE INSIEME
     memories: {
-        introduction: "esempio",
+        introduction: "Qui verranno pubblicate le nostre esperienze, tutto quello che faremo insieme.",
 
         moments: [
             {
@@ -129,7 +129,7 @@ const SITE_CONTENT = {
 
     // DEDICA FINALE
     special: {
-        message: "Ti amo infinitamente, non ti cambierei per nulla al mondo. Come te, nessuna. Ti amo.",
+        message: "Ti amo infinitamente, non ti cambierei per nulla al mondo. Come te, nessuna. Sei la differenza in un mondo che fa acqua da tutte le parti. E tu, sei la toppa di questo mondo.",
         signature: "Checco tuo"
     }
 
