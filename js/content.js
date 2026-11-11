@@ -29,10 +29,10 @@ const SITE_CONTENT = {
 
     // PRESENTAZIONE INIZIALE
     presentation: {
-        story: "esempio",
-        feelings: "esempio",
-        memories: "esempio",
-        special: "esempio"
+        story: "La nostra storia, raccontata in modo diverso.",
+        feelings: "Le sensazioni più belle.",
+        memories: "I nostri ricordi migliori.",
+        special: "Qualcosa di speciale, come te."
     },
 
     // LA VOSTRA STORIA
