@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,10 @@
 
 <body>
 
-    <!-- SFONDO ANIMATO -->
+    <!-- =====================================
+         SFONDO ANIMATO
+    ====================================== -->
+
     <div class="ambient-background">
         <div class="ambient-glow glow-one"></div>
         <div class="ambient-glow glow-two"></div>
@@ -28,7 +32,11 @@
         <div id="particles"></div>
     </div>
 
-    <!-- SCHERMATA DI PRESENTAZIONE -->
+
+    <!-- =====================================
+         SCHERMATA DI PRESENTAZIONE
+    ====================================== -->
+
     <section id="presentation" class="presentation">
 
         <div class="presentation-top">
@@ -43,8 +51,11 @@
         <div class="slides-container">
 
             <!-- SLIDE 1 -->
+
             <article class="presentation-slide active" data-slide="0">
+
                 <div class="slide-content">
+
                     <span class="eyebrow">UN PICCOLO MONDO</span>
 
                     <h1>
@@ -57,12 +68,18 @@
                     <p class="slide-description">
                         Un posto speciale, per una persona speciale.
                     </p>
+
                 </div>
+
             </article>
 
+
             <!-- SLIDE 2 -->
+
             <article class="presentation-slide" data-slide="1">
+
                 <div class="slide-content">
+
                     <span class="eyebrow">TUTTO HA UN INIZIO</span>
 
                     <h2>
@@ -71,14 +88,20 @@
                     </h2>
 
                     <p class="slide-description">
-                        <!-- TESTO PERSONALE DA INSERIRE -->
+                        <!-- TESTO PERSONALE -->
                     </p>
+
                 </div>
+
             </article>
 
+
             <!-- SLIDE 3 -->
+
             <article class="presentation-slide" data-slide="2">
+
                 <div class="slide-content">
+
                     <span class="eyebrow">PAROLE DAL CUORE</span>
 
                     <h2>
@@ -87,14 +110,20 @@
                     </h2>
 
                     <p class="slide-description">
-                        <!-- TESTO PERSONALE DA INSERIRE -->
+                        <!-- TESTO PERSONALE -->
                     </p>
+
                 </div>
+
             </article>
 
+
             <!-- SLIDE 4 -->
+
             <article class="presentation-slide" data-slide="3">
+
                 <div class="slide-content">
+
                     <span class="eyebrow">ISTANTI PREZIOSI</span>
 
                     <h2>
@@ -103,14 +132,20 @@
                     </h2>
 
                     <p class="slide-description">
-                        <!-- TESTO PERSONALE DA INSERIRE -->
+                        <!-- TESTO PERSONALE -->
                     </p>
+
                 </div>
+
             </article>
 
+
             <!-- SLIDE 5 -->
+
             <article class="presentation-slide" data-slide="4">
+
                 <div class="slide-content">
+
                     <span class="eyebrow">QUALCOSA DI SPECIALE</span>
 
                     <h2>
@@ -119,14 +154,20 @@
                     </h2>
 
                     <p class="slide-description">
-                        <!-- TESTO PERSONALE DA INSERIRE -->
+                        <!-- TESTO PERSONALE -->
                     </p>
+
                 </div>
+
             </article>
 
+
             <!-- SLIDE 6 -->
+
             <article class="presentation-slide" data-slide="5">
+
                 <div class="slide-content final-slide">
+
                     <div class="final-heart">♡</div>
 
                     <span class="eyebrow">BENVENUTA</span>
@@ -139,10 +180,15 @@
                     <p class="slide-description">
                         Tutto quello che troverai qui è dedicato a noi.
                     </p>
+
                 </div>
+
             </article>
 
         </div>
+
+
+        <!-- CONTROLLI PRESENTAZIONE -->
 
         <div class="presentation-controls">
 
@@ -151,8 +197,10 @@
             </button>
 
             <button id="nextSlide" class="next-button" type="button">
+
                 <span id="nextButtonText">Continua</span>
                 <span class="button-arrow">→</span>
+
             </button>
 
         </div>
@@ -164,39 +212,84 @@
     </section>
 
 
-    <!-- SITO PRINCIPALE -->
+
+    <!-- =====================================
+         SITO PRINCIPALE
+    ====================================== -->
+
     <main id="mainWebsite" class="main-website hidden">
 
-        <!-- HEADER -->
+
+        <!-- =================================
+             HEADER E NAVIGAZIONE
+        ================================== -->
+
         <header class="site-header">
 
             <a href="#home" class="site-logo">
+
                 <span class="logo-symbol">♡</span>
                 <span>Per te, Sofia</span>
+
             </a>
 
-            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Apri menu">
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Apri menu"
+            >
+
                 <span></span>
                 <span></span>
+
             </button>
 
+
             <nav class="navigation" id="navigation">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#story" class="nav-link">La nostra storia</a>
-                <a href="#letter" class="nav-link">Una lettera</a>
-                <a href="#memories" class="nav-link">Ricordi</a>
-                <a href="#special" class="nav-link">Per te</a>
+
+                <a href="#home" class="nav-link active">
+                    Home
+                </a>
+
+                <a href="#story" class="nav-link">
+                    La nostra storia
+                </a>
+
+                <a href="#milestones" class="nav-link">
+                    Il nostro percorso
+                </a>
+
+                <a href="#letter" class="nav-link">
+                    Una lettera
+                </a>
+
+                <a href="#memories" class="nav-link">
+                    Ricordi
+                </a>
+
+                <a href="#special" class="nav-link">
+                    Per te
+                </a>
+
             </nav>
 
         </header>
 
 
-        <!-- HOME -->
+
+        <!-- =================================
+             HOME
+        ================================== -->
+
         <section id="home" class="website-section hero-section">
 
             <div class="hero-content">
 
-                <span class="eyebrow">UN POSTO SOLO NOSTRO</span>
+                <span class="eyebrow">
+                    UN POSTO SOLO NOSTRO
+                </span>
 
                 <h1>
                     Un piccolo<br>
@@ -206,72 +299,170 @@
                 <div class="decorative-line"></div>
 
                 <p class="hero-description">
-                    <!-- INSERISCI QUI IL TUO TESTO -->
+                    <!-- TESTO GESTITO DA CONTENT.JS -->
                 </p>
 
                 <a href="#story" class="elegant-button">
+
                     Scopri il nostro mondo
                     <span>→</span>
+
                 </a>
 
             </div>
 
+
             <div class="hero-decoration">
+
                 <div class="orbit orbit-one"></div>
                 <div class="orbit orbit-two"></div>
                 <div class="orbit-heart">♡</div>
+
             </div>
 
         </section>
 
 
-        <!-- LA NOSTRA STORIA -->
+
+        <!-- =================================
+             CAPITOLO I - LA NOSTRA STORIA
+        ================================== -->
+
         <section id="story" class="website-section content-section">
 
             <div class="section-heading">
-                <span class="eyebrow">CAPITOLO I</span>
-                <h2>La nostra <span class="highlight">storia.</span></h2>
-                <p> <!-- BREVE INTRODUZIONE --> </p>
+
+                <span class="eyebrow">
+                    CAPITOLO I
+                </span>
+
+                <h2>
+                    La nostra <span class="highlight">storia.</span>
+                </h2>
+
+                <p>
+                    <!-- INTRODUZIONE GESTITA DA CONTENT.JS -->
+                </p>
+
             </div>
+
 
             <div id="storyCards" class="cards-grid">
 
-                <!-- DUPLICA QUESTE CARD PER AGGIUNGERE MOMENTI -->
-
-                <article class="romantic-card story-card">
-                    <div class="card-icon">♡</div>
-                    <span class="card-date"><!-- DATA --> </span>
-                    <h3><!-- TITOLO DEL RICORDO --></h3>
-                    <p><!-- DESCRIZIONE DEL MOMENTO --></p>
-                </article>
+                <!-- LE CARD VENGONO GENERATE DA APP.JS -->
 
             </div>
 
         </section>
 
 
-        <!-- LETTERA -->
-        <section id="letter" class="website-section content-section letter-section">
+
+        <!-- =================================
+             CAPITOLO II - TIMELINE
+        ================================== -->
+
+        <section
+            id="milestones"
+            class="website-section content-section milestones-section"
+        >
 
             <div class="section-heading">
-                <span class="eyebrow">CAPITOLO II</span>
-                <h2>Una lettera <span class="highlight">per te.</span></h2>
+
+                <span class="eyebrow">
+                    CAPITOLO II
+                </span>
+
+                <h2>
+                    Il nostro <span class="highlight">percorso.</span>
+                </h2>
+
+                <p id="milestoneIntroduction">
+                    Ogni storia è fatta di momenti speciali.
+                    Alcuni li abbiamo già vissuti, altri ci aspettano.
+                </p>
+
             </div>
+
+
+            <!-- CONTENITORE TIMELINE -->
+
+            <div class="milestone-wrapper">
+
+                <div
+                    id="milestoneTimeline"
+                    class="milestone-timeline"
+                    aria-label="Timeline dei nostri traguardi"
+                >
+
+                    <!--
+                        I TRAGUARDI VENGONO GENERATI AUTOMATICAMENTE
+                        DA APP.JS IN BASE ALLE DATE PRESENTI
+                        IN CONTENT.JS.
+                    -->
+
+                </div>
+
+            </div>
+
+
+            <!-- CHIUSURA TIMELINE -->
+
+            <div class="milestone-footer">
+
+                <span class="milestone-footer-line"></span>
+
+                <p>
+                    Il bello deve ancora venire.
+                </p>
+
+                <span class="milestone-footer-line"></span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CAPITOLO III - LETTERA
+        ================================== -->
+
+        <section
+            id="letter"
+            class="website-section content-section letter-section"
+        >
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    CAPITOLO III
+                </span>
+
+                <h2>
+                    Una lettera <span class="highlight">per te.</span>
+                </h2>
+
+            </div>
+
 
             <article class="letter-card">
 
                 <div class="letter-decoration">♡</div>
 
                 <div class="letter-body">
-                    <p class="letter-greeting"><!-- SALUTO --> </p>
+
+                    <p class="letter-greeting">
+                        <!-- SALUTO -->
+                    </p>
 
                     <div class="letter-text">
-                        <!-- SCRIVI QUI LA TUA LETTERA -->
+                        <!-- LETTERA GESTITA DA CONTENT.JS -->
                     </div>
 
                     <p class="letter-signature">
-                        <!-- LA TUA FIRMA -->
+                        <!-- FIRMA -->
                     </p>
+
                 </div>
 
             </article>
@@ -279,53 +470,65 @@
         </section>
 
 
-        <!-- RICORDI -->
-        <section id="memories" class="website-section content-section memories-section">
+
+        <!-- =================================
+             CAPITOLO IV - RICORDI
+        ================================== -->
+
+        <section
+            id="memories"
+            class="website-section content-section memories-section"
+        >
 
             <div class="section-heading">
-                <span class="eyebrow">CAPITOLO III</span>
-                <h2>I nostri <span class="highlight">ricordi.</span></h2>
+
+                <span class="eyebrow">
+                    CAPITOLO IV
+                </span>
+
+                <h2>
+                    I nostri <span class="highlight">ricordi.</span>
+                </h2>
 
                 <p>
-                    <!-- BREVE INTRODUZIONE -->
+                    <!-- INTRODUZIONE GESTITA DA CONTENT.JS -->
                 </p>
+
             </div>
+
 
             <div id="memoryGallery" class="memory-gallery">
 
                 <!--
-                    AGGIUNGI LE FOTOGRAFIE NELLA CARTELLA assets/images/
-                    E INSERISCI QUI LE RELATIVE CARD.
+                    I RICORDI VENGONO GENERATI AUTOMATICAMENTE
+                    DA APP.JS UTILIZZANDO CONTENT.JS.
                 -->
-
-                <article class="memory-card">
-                    <div class="memory-image-placeholder">
-                        <span>♡</span>
-                    </div>
-
-                    <div class="memory-caption">
-                        <h3><!-- TITOLO --> </h3>
-                        <p><!-- DESCRIZIONE --> </p>
-                    </div>
-                </article>
 
             </div>
 
+
             <p class="gallery-note">
-                Questo spazio è in continua evoluzione.
-                Nuove fotografie, ricordi e momenti speciali
-                verranno aggiunti e aggiornati nel tempo.
+                <!-- NOTA GESTITA DA CONTENT.JS -->
             </p>
 
         </section>
 
 
-        <!-- SORPRESA FINALE -->
-        <section id="special" class="website-section content-section special-section">
+
+        <!-- =================================
+             CAPITOLO V - DEDICA FINALE
+        ================================== -->
+
+        <section
+            id="special"
+            class="website-section content-section special-section"
+        >
 
             <div class="special-content">
 
-                <span class="eyebrow">CAPITOLO IV</span>
+                <span class="eyebrow">
+                    CAPITOLO V
+                </span>
 
                 <div class="special-heart">♡</div>
 
@@ -335,7 +538,7 @@
                 </h2>
 
                 <p>
-                    <!-- DEDICA FINALE -->
+                    <!-- DEDICA GESTITA DA CONTENT.JS -->
                 </p>
 
                 <div class="decorative-line"></div>
@@ -349,24 +552,37 @@
         </section>
 
 
-        <!-- FOOTER -->
+
+        <!-- =================================
+             FOOTER
+        ================================== -->
+
         <footer class="site-footer">
 
             <div class="footer-heart">♡</div>
 
-            <p>Un piccolo mondo, tutto nostro.</p>
+            <p>
+                Un piccolo mondo, tutto nostro.
+            </p>
 
-            <span>PER TE, SOFIA</span>
+            <span>
+                PER TE, SOFIA
+            </span>
 
         </footer>
 
     </main>
 
 
-    <!-- SCRIPT -->
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
     <script src="js/content.js"></script>
     <script src="js/presentation.js"></script>
     <script src="js/app.js"></script>
 
 </body>
+
 </html>
