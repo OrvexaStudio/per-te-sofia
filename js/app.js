@@ -277,82 +277,455 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================
-       RENDER MEMORIES
-    ===================================== */
+/* =========================================
+   RENDER MEMORIES AND MEDIA ALBUMS
+========================================= */
 
-    function renderMemories() {
+function renderMemories() {
 
-        const container = document.getElementById("memoryGallery");
+    const container = document.getElementById("memoryGallery");
 
-        const introduction = document.querySelector(
-            "#memories .section-heading p"
+    const introduction = document.querySelector(
+        "#memories .section-heading p"
+    );
+
+    const note = document.querySelector(".gallery-note");
+
+    if (!container) return;
+
+    if (introduction) {
+        introduction.textContent = content.memories.introduction;
+    }
+
+    if (note) {
+        note.textContent = content.memories.note;
+    }
+
+    container.innerHTML = "";
+
+    const moments = content.memories.moments || [];
+    const albums = content.memories.albums || [];
+
+    // RICORDI TESTUALI
+
+    moments.forEach(moment => {
+
+        const card = document.createElement("article");
+
+        card.className = "memory-card";
+
+        const caption = document.createElement("div");
+        caption.className = "memory-caption";
+
+        const date = document.createElement("span");
+        date.className = "memory-date";
+        date.textContent = moment.date || "";
+
+        const title = document.createElement("h3");
+        title.textContent = moment.title || "";
+
+        const description = document.createElement("p");
+        description.textContent = moment.description || "";
+
+        caption.appendChild(date);
+        caption.appendChild(title);
+        caption.appendChild(description);
+
+        card.appendChild(caption);
+
+        container.appendChild(card);
+
+    });
+
+    // ALBUM MULTIMEDIALI
+
+    albums.forEach(album => {
+
+        const card = document.createElement("article");
+
+        card.className = "memory-album-card";
+        card.dataset.albumId = album.id;
+
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute(
+            "aria-label",
+            `Apri l'album: ${album.title}`
         );
 
-        const note = document.querySelector(".gallery-note");
+        const cover = document.createElement("div");
+        cover.className = "album-card-cover";
 
-        if (!container) return;
+        const coverDecoration = document.createElement("span");
+        coverDecoration.className = "album-cover-decoration";
+        coverDecoration.textContent = "♡";
 
-        if (introduction) {
-            introduction.textContent = content.memories.introduction;
-        }
+        const coverLabel = document.createElement("span");
+        coverLabel.className = "album-cover-label";
+        coverLabel.textContent = "UN RICORDO DA CONSERVARE";
 
-        if (note) {
-            note.textContent = content.memories.note;
-        }
+        cover.appendChild(coverDecoration);
+        cover.appendChild(coverLabel);
 
-        container.innerHTML = "";
+        const caption = document.createElement("div");
+        caption.className = "album-card-caption";
 
-        const moments = content.memories.moments || [];
+        const title = document.createElement("h3");
+        title.textContent = album.title || "";
 
-        if (moments.length === 0) {
+        const description = document.createElement("p");
+        description.textContent = album.description || "";
 
-            const empty = document.createElement("div");
+        const instruction = document.createElement("span");
+        instruction.className = "album-card-instruction";
+        instruction.textContent =
+            album.instruction || "Clicca per vedere foto e video";
 
-            empty.className = "empty-memories";
-            empty.innerHTML = `
-                <span>♡</span>
-                <p>I nostri ricordi troveranno posto qui.</p>
-            `;
+        caption.appendChild(title);
+        caption.appendChild(description);
+        caption.appendChild(instruction);
 
-            container.appendChild(empty);
+        card.appendChild(cover);
+        card.appendChild(caption);
 
-            return;
+        card.addEventListener("click", () => {
+            openMemoryAlbum(album);
+        });
 
-        }
+        card.addEventListener("keydown", event => {
 
-        moments.forEach(moment => {
-
-            const card = document.createElement("article");
-
-            card.className = "memory-card";
-
-            const caption = document.createElement("div");
-            caption.className = "memory-caption";
-
-            const date = document.createElement("span");
-            date.className = "memory-date";
-            date.textContent = moment.date || "";
-
-            const title = document.createElement("h3");
-            title.textContent = moment.title || "";
-
-            const description = document.createElement("p");
-            description.textContent = moment.description || "";
-
-            caption.appendChild(date);
-            caption.appendChild(title);
-            caption.appendChild(description);
-
-            card.appendChild(caption);
-
-            container.appendChild(card);
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openMemoryAlbum(album);
+            }
 
         });
 
+        container.appendChild(card);
+
+    });
+
+    // MESSAGGIO SE NON CI SONO CONTENUTI
+
+    if (moments.length === 0 && albums.length === 0) {
+
+        const empty = document.createElement("div");
+
+        empty.className = "empty-memories";
+        empty.innerHTML = `
+            <span>♡</span>
+            <p>I nostri ricordi troveranno posto qui.</p>
+        `;
+
+        container.appendChild(empty);
+
     }
 
+    initializeScrollAnimations();
 
+}
+
+   /* =========================================
+   MEMORY ALBUM MODAL
+========================================= */
+
+let memoryAlbumModal = null;
+let memoryImageViewer = null;
+let previousAlbumFocus = null;
+
+
+/* =========================================
+   CREATE ALBUM MODAL
+========================================= */
+
+function createMemoryAlbumModal() {
+
+    if (memoryAlbumModal) return;
+
+    memoryAlbumModal = document.createElement("div");
+
+    memoryAlbumModal.className = "album-modal";
+    memoryAlbumModal.setAttribute("aria-hidden", "true");
+
+    memoryAlbumModal.innerHTML = `
+        <div class="album-modal-content">
+
+            <button
+                class="album-modal-close"
+                type="button"
+                aria-label="Chiudi album"
+            >×</button>
+
+            <div class="album-modal-heading">
+                <span class="album-modal-eyebrow">
+                    UN RICORDO DA CONSERVARE
+                </span>
+
+                <h2 class="album-modal-title"></h2>
+
+                <p class="album-modal-description"></p>
+            </div>
+
+            <div class="album-media-gallery"></div>
+
+            <p class="album-modal-empty">
+                Le nostre foto e i nostri video appariranno qui.
+            </p>
+
+        </div>
+
+        <div class="album-image-viewer" aria-hidden="true">
+
+            <button
+                class="album-image-close"
+                type="button"
+                aria-label="Chiudi fotografia"
+            >×</button>
+
+            <img src="" alt="">
+
+            <p class="album-image-caption"></p>
+
+        </div>
+    `;
+
+    document.body.appendChild(memoryAlbumModal);
+
+    memoryImageViewer = memoryAlbumModal.querySelector(
+        ".album-image-viewer"
+    );
+
+    const closeButton = memoryAlbumModal.querySelector(
+        ".album-modal-close"
+    );
+
+    const imageCloseButton = memoryAlbumModal.querySelector(
+        ".album-image-close"
+    );
+
+    closeButton.addEventListener("click", closeMemoryAlbum);
+
+    imageCloseButton.addEventListener(
+        "click",
+        closeMemoryImage
+    );
+
+    memoryAlbumModal.addEventListener("click", event => {
+
+        if (event.target === memoryAlbumModal) {
+            closeMemoryAlbum();
+        }
+
+    });
+
+    memoryImageViewer.addEventListener("click", event => {
+
+        if (event.target === memoryImageViewer) {
+            closeMemoryImage();
+        }
+
+    });
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+
+            if (
+                memoryImageViewer &&
+                memoryImageViewer.classList.contains("active")
+            ) {
+                closeMemoryImage();
+                return;
+            }
+
+            if (
+                memoryAlbumModal &&
+                memoryAlbumModal.classList.contains("active")
+            ) {
+                closeMemoryAlbum();
+            }
+
+        }
+
+    });
+
+}
+
+
+/* =========================================
+   OPEN ALBUM
+========================================= */
+
+function openMemoryAlbum(album) {
+
+    createMemoryAlbumModal();
+
+    previousAlbumFocus = document.activeElement;
+
+    const title = memoryAlbumModal.querySelector(
+        ".album-modal-title"
+    );
+
+    const description = memoryAlbumModal.querySelector(
+        ".album-modal-description"
+    );
+
+    const gallery = memoryAlbumModal.querySelector(
+        ".album-media-gallery"
+    );
+
+    const emptyMessage = memoryAlbumModal.querySelector(
+        ".album-modal-empty"
+    );
+
+    title.textContent = album.title || "";
+    description.textContent = album.description || "";
+
+    gallery.innerHTML = "";
+
+    const media = album.media || [];
+
+    emptyMessage.style.display =
+        media.length === 0 ? "block" : "none";
+
+    media.forEach(item => {
+
+        if (!item.src || !["image", "video"].includes(item.type)) {
+            return;
+        }
+
+        const mediaCard = document.createElement("div");
+        mediaCard.className = "album-media-item";
+
+        if (item.type === "image") {
+
+            const image = document.createElement("img");
+
+            image.src = item.src;
+            image.alt = item.alt || album.title || "Fotografia";
+            image.loading = "lazy";
+
+            image.addEventListener("click", () => {
+                openMemoryImage(item);
+            });
+
+            mediaCard.appendChild(image);
+
+        }
+
+        if (item.type === "video") {
+
+            const video = document.createElement("video");
+
+            video.src = item.src;
+            video.controls = true;
+            video.playsInline = true;
+            video.preload = "metadata";
+
+            mediaCard.appendChild(video);
+
+        }
+
+        if (item.caption) {
+
+            const caption = document.createElement("p");
+
+            caption.className = "album-media-caption";
+            caption.textContent = item.caption;
+
+            mediaCard.appendChild(caption);
+
+        }
+
+        gallery.appendChild(mediaCard);
+
+    });
+
+    memoryAlbumModal.classList.add("active");
+    memoryAlbumModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("album-modal-open");
+
+    memoryAlbumModal.querySelector(
+        ".album-modal-close"
+    ).focus();
+
+}
+
+
+/* =========================================
+   CLOSE ALBUM
+========================================= */
+
+function closeMemoryAlbum() {
+
+    if (!memoryAlbumModal) return;
+
+    closeMemoryImage();
+
+    memoryAlbumModal.classList.remove("active");
+    memoryAlbumModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("album-modal-open");
+
+    // Ferma eventuali video in riproduzione.
+
+    memoryAlbumModal.querySelectorAll("video").forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    if (
+        previousAlbumFocus &&
+        typeof previousAlbumFocus.focus === "function"
+    ) {
+        previousAlbumFocus.focus();
+    }
+
+}
+
+
+/* =========================================
+   OPEN IMAGE VIEWER
+========================================= */
+
+function openMemoryImage(item) {
+
+    if (!memoryImageViewer) return;
+
+    const image = memoryImageViewer.querySelector("img");
+
+    const caption = memoryImageViewer.querySelector(
+        ".album-image-caption"
+    );
+
+    image.src = item.src;
+    image.alt = item.alt || "Fotografia";
+
+    caption.textContent = item.caption || "";
+
+    memoryImageViewer.classList.add("active");
+    memoryImageViewer.setAttribute("aria-hidden", "false");
+
+}
+
+
+/* =========================================
+   CLOSE IMAGE VIEWER
+========================================= */
+
+function closeMemoryImage() {
+
+    if (!memoryImageViewer) return;
+
+    memoryImageViewer.classList.remove("active");
+    memoryImageViewer.setAttribute("aria-hidden", "true");
+
+    const image = memoryImageViewer.querySelector("img");
+
+    image.src = "";
+
+}
     /* =====================================
        RENDER SPECIAL SECTION
     ===================================== */
