@@ -185,19 +185,19 @@ albums: [
         media: [
             {
                 type: "image",
-                src: "media/colazione/foto-01.jpg",
+                src: "media/colazione/foto-01.jpeg",
                 alt: "La nostra prima colazione",
                 caption: "Un ricordo della nostra mattina."
             },
             {
                 type: "image",
-                src: "media/colazione/foto-02.jpg",
+                src: "media/colazione/foto-02.jpeg",
                 alt: "La nostra prima colazione",
                 caption: "Un altro piccolo ricordo."
             },
             {
                 type: "image",
-                src: "media/colazione/foto-03.jpg",
+                src: "media/colazione/foto-03.jpeg",
                 alt: "La nostra prima colazione",
                 caption: "Da conservare."
             },
@@ -234,7 +234,6 @@ albums: [
         ]
     }
 ],
-
        
         note: "Questo spazio è in continua evoluzione. Nuovi ricordi e momenti speciali verranno aggiunti e aggiornati nel tempo."
     },
