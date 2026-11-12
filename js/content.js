@@ -174,6 +174,35 @@ const SITE_CONTENT = {
             */
         ],
 
+               albums: [
+            {
+                id: "prima-colazione",
+                title: "La nostra prima colazione insieme",
+                description: "Un altro piccolo momento che voglio conservare.",
+                instruction: "Clicca per vedere foto e video",
+                media: [
+                    /*
+                    Per aggiungere una fotografia:
+
+                    {
+                        type: "image",
+                        src: "media/colazione/foto-01.jpg",
+                        alt: "La nostra prima colazione",
+                        caption: "Una mattina insieme."
+                    },
+
+                    Per aggiungere un video:
+
+                    {
+                        type: "video",
+                        src: "media/colazione/video-01.mp4",
+                        caption: "Un momento della nostra mattina."
+                    }
+                    */
+                ]
+            }
+        ],
+       
         note: "Questo spazio è in continua evoluzione. Nuovi ricordi e momenti speciali verranno aggiunti e aggiornati nel tempo."
     },
 
