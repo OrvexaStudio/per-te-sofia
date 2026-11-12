@@ -203,11 +203,6 @@ albums: [
             },
             {
                 type: "video",
-                src: "media/colazione/video-01.mp4",
-                caption: "Video 1"
-            },
-            {
-                type: "video",
                 src: "media/colazione/video-02.mp4",
                 caption: "Video 2"
             },
@@ -215,21 +210,6 @@ albums: [
                 type: "video",
                 src: "media/colazione/video-03.mp4",
                 caption: "Video 3"
-            },
-            {
-                type: "video",
-                src: "media/colazione/video-04.mp4",
-                caption: "Video 4"
-            },
-            {
-                type: "video",
-                src: "media/colazione/video-05.mp4",
-                caption: "Video 5"
-            },
-            {
-                type: "video",
-                src: "media/colazione/video-06.mp4",
-                caption: "Video 6"
             }
         ]
     }
