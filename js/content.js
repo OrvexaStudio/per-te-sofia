@@ -178,7 +178,7 @@ const SITE_CONTENT = {
             {
                 id: "prima-colazione",
                 title: "La nostra prima colazione insieme",
-                description: "Un altro piccolo momento che voglio conservare.",
+                description: "Un piccolo ricordino di noi due.",
                 instruction: "Clicca per vedere foto e video",
                 media: [
                     /*
