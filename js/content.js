@@ -174,34 +174,67 @@ const SITE_CONTENT = {
             */
         ],
 
-               albums: [
+  
+albums: [
+    {
+        id: "prima-colazione",
+        title: "La nostra prima colazione insieme",
+        description: "Un altro piccolo momento che voglio conservare.",
+        instruction: "Clicca per vedere foto e video",
+
+        media: [
             {
-                id: "prima-colazione",
-                title: "Colazione e mattinata insieme",
-                description: "Un piccolo ricordino di noi due.",
-                instruction: "Clicca per vedere foto e video",
-                media: [
-                    /*
-                    Per aggiungere una fotografia:
-
-                    {
-                        type: "image",
-                        src: "media/colazione/foto-01.jpg",
-                        alt: "La nostra prima colazione",
-                        caption: "Una mattina insieme."
-                    },
-
-                    Per aggiungere un video:
-
-                    {
-                        type: "video",
-                        src: "media/colazione/video-01.mp4",
-                        caption: "Un momento della nostra mattina."
-                    }
-                    */
-                ]
+                type: "image",
+                src: "media/colazione/foto-01.jpg",
+                alt: "La nostra prima colazione",
+                caption: "Un ricordo della nostra mattina."
+            },
+            {
+                type: "image",
+                src: "media/colazione/foto-02.jpg",
+                alt: "La nostra prima colazione",
+                caption: "Un altro piccolo ricordo."
+            },
+            {
+                type: "image",
+                src: "media/colazione/foto-03.jpg",
+                alt: "La nostra prima colazione",
+                caption: "Da conservare."
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-01.mp4",
+                caption: "Video 1"
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-02.mp4",
+                caption: "Video 2"
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-03.mp4",
+                caption: "Video 3"
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-04.mp4",
+                caption: "Video 4"
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-05.mp4",
+                caption: "Video 5"
+            },
+            {
+                type: "video",
+                src: "media/colazione/video-06.mp4",
+                caption: "Video 6"
             }
-        ],
+        ]
+    }
+],
+
        
         note: "Questo spazio è in continua evoluzione. Nuovi ricordi e momenti speciali verranno aggiunti e aggiornati nel tempo."
     },
